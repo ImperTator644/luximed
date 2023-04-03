@@ -1,11 +1,11 @@
-package com.luximed;
+package com.luximed.test;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient("test-service")
+@FeignClient(name = "test-service")
 public interface TestClient {
 
     @GetMapping("/test")
-    String executeTest();
+    String test();
 }
