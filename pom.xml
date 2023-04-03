@@ -6,6 +6,7 @@
 	<modules>
 		<module>database-service</module>
 		<module>discovery-server</module>
+		<module>test-service</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
