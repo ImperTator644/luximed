@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login page</title>
+    </head>
+    <body>
+        <p>Clinic page</p>
+
+        <div style="margin: 2rem">
+            <form th:method="post" th:action="@{/clinic/add}">
+                Building number: <input type="text" name="buildingNumber" />
+                City: <input type="text" name="city" />
+                Postal code: <input type="text" name="postalCode" />
+                Street: <input type="text" name="street" />
+                <input type="submit" value="Add clinic"/>
+            </form>
+        </div>
+
+        <form th:method="post" th:action="@{/clinic/delete}">
+            Id: <input type="text" name="id" />
+            <input type="submit" value="Delete clinic"/>
+        </form>
+
+    </body>
+</html>
