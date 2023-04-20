@@ -8,6 +8,7 @@
 		<module>discovery-server</module>
 		<module>front-service</module>
 		<module>reservation-service</module>
+		<module>client-service</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
