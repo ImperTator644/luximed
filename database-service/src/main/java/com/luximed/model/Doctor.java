@@ -1,9 +1,16 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class Doctor {
 
     @Id
@@ -18,4 +25,8 @@ public class Doctor {
     @ManyToMany
     @JoinColumn(nullable = false)
     private List<Specialization> specialization;
+
+    public Doctor() {
+
+    }
 }

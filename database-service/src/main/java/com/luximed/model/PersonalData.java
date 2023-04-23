@@ -1,10 +1,17 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class PersonalData {
 
     @Id
@@ -25,4 +32,8 @@ public class PersonalData {
 
     @Column(nullable = false)
     private Gender gender;
+
+    public PersonalData() {
+
+    }
 }
