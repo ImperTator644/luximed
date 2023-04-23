@@ -12,10 +12,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>database-service</name>
     <description>database-service</description>
-    <properties>
-        <java.version>11</java.version>
-        <springdoc-openapi-ui>1.6.15</springdoc-openapi-ui>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,11 +33,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc-openapi-ui}</version>
         </dependency>
     </dependencies>
 
