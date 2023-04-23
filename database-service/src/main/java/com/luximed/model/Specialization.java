@@ -1,8 +1,15 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class Specialization {
 
     @Id
@@ -12,4 +19,8 @@ public class Specialization {
 
     @Column(nullable = false)
     private String name;
+
+    public Specialization() {
+
+    }
 }

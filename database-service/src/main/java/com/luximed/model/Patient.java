@@ -1,8 +1,16 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 
+
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class Patient {
 
     @Id
@@ -13,4 +21,8 @@ public class Patient {
     @OneToOne
     @JoinColumn(nullable = false)
     private PersonalData personalData;
+
+    public Patient() {
+
+    }
 }

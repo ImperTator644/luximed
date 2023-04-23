@@ -11,3 +11,6 @@ Services and their ports:
 | reservation-service | 8082     |
 | database-service    | 8083     |
 | discovery-server    | 8761     |
+
+Endpoints are exposed on swagger
+http://localhost:8083/swagger-ui.html

@@ -1,10 +1,17 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class Appointment {
 
     @Id
@@ -33,4 +40,8 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(nullable = false)
     private AppointmentType appointmentType;
+
+    public Appointment() {
+
+    }
 }

@@ -1,9 +1,16 @@
 package com.luximed.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 public class Prescription {
 
     @Id
@@ -20,4 +27,8 @@ public class Prescription {
 
     @Column(nullable = false)
     private LocalDate expirationDate;
+
+    public Prescription() {
+
+    }
 }
