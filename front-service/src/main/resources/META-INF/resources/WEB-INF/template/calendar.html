@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'/>
+    <title>Calendar</title>
+    <link href="http://cdn.jsdelivr.net/webjars/fullcalendar/2.2.5/fullcalendar.css"
+          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.css}"
+          rel="stylesheet"></link>
+    <link href="http://cdn.jsdelivr.net/webjars/fullcalendar/2.2.5/fullcalendar.print.css"
+          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.print.css}"
+          rel="stylesheet" media="print"></link>
+
+
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.9.0/jquery.min.js"
+            th:src="@{/webjars/momentjs/2.9.0/min/moment.min.js}"
+            type="text/javascript"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.4.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" type="text/javascript"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/fullcalendar/2.2.5/fullcalendar.min.js"
+            th:src="@{/webjars/fullcalendar/2.2.5/fullcalendar.min.js}"
+            type="text/javascript"></script>
+
+
+    <link rel="stylesheet"
+          href="http//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+          th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+    <script
+            src="http//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"
+            th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}"
+            type="text/javascript"></script>
+
+
+</head>
+<body>
+
+<div id="header">
+    <h1>Calendar</h1>
+</div>
+
+<div id='calendar'></div>
+
+
+<script>
+    $(function (){
+        $(document).ready(async function () {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultDate: moment().format("YYYY-MM-DD"),
+                editable: true,
+                eventLimit: true,
+                events: {
+                    url: '/appointment/all',
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    }
+                },
+                selectable: true,
+                selectHelper: true,
+                loading: function (bool) {
+                    $('#loading').toggle(bool);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
