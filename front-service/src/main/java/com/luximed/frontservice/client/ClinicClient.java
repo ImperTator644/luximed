@@ -34,6 +34,4 @@ public interface ClinicClient {
     @GetMapping(value = "/api/database/appointment/patient/{id}")
     List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id);
 
-    @PostMapping(value = "/api/database/appointment/patient")
-    List<AppointmentDto> getAppointmentsByPatientIdTwo(@RequestParam Integer id);
 }

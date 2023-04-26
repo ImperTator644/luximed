@@ -1,8 +1,6 @@
 package com.luximed.frontservice.dto;
 
-import com.luximed.frontservice.client.ClinicClient;
 import lombok.Data;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -17,4 +15,7 @@ public class AppointmentDto {
     private ClinicDto clinic;
     private LocalDate date;
     private LocalDateTime time;
+    private LocalDateTime start, end;
+    private String title;
+    private AppointmentTypeDto appointmentType;
 }

@@ -25,7 +25,15 @@ public class TestAppointmentController {
     @GetMapping("appointment/all")
     @ResponseBody
     public List<AppointmentDto> getAppointments() {
-        return clinicClient.getAppointments();
+        List<AppointmentDto> list = clinicClient.getAppointments();
+        for(AppointmentDto dto : list){
+            dto.setTitle(dto.getAppointmentType().getName() + " - " +
+                    dto.getPatient().getPersonalData().getName() + " " +
+                    dto.getPatient().getPersonalData().getSurname());
+            dto.setStart(dto.getTime());
+            dto.setEnd(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration()));
+        }
+        return list;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "appointment/{id}")
@@ -37,12 +45,19 @@ public class TestAppointmentController {
     @RequestMapping(method = RequestMethod.GET, value = "appointment/patient/{id}")
     @ResponseBody
     public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id) {
-        return clinicClient.getAppointmentsByPatientId(id);
+        List<AppointmentDto> list = clinicClient.getAppointmentsByPatientId(id);
+        for(AppointmentDto dto : list){
+            dto.setTitle(dto.getAppointmentType().getName() + " - " +
+                    dto.getPatient().getPersonalData().getName() + " " +
+                    dto.getPatient().getPersonalData().getSurname());
+            dto.setStart(dto.getTime());
+            dto.setEnd(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration()));
+        }
+        return list;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "appointment/patient")
     public ModelAndView getAppointmentsByPatientIdTwo(@RequestParam Integer id) {
-        /*clinicClient.getAppointmentsByPatientIdTwo(id);*/
         ModelAndView mav = new ModelAndView("calendar");
         mav.addObject("id", id);
 

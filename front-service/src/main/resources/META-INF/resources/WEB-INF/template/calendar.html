@@ -30,6 +30,9 @@
             th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}"
             type="text/javascript"></script>
 
+    <script src="fullcalendar/fullcalendar.js"></script>
+    <script src='fullcalendar/lang/pl.js'></script>
+
 <!--    <link rel="stylesheet" th:href="@{/calendar.css}">-->
     <style>
         body {
@@ -38,7 +41,7 @@
         }
 
         #calendar {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 40px auto;
             padding: 0 10px;
         }
@@ -52,7 +55,7 @@
 <body>
 
 <div id="header">
-    <h1>Kalendarz Wszystkich Wizyt</h1>
+    <h1>Kalendarz Wizyt</h1>
 </div>
 
 <div id='calendar'></div>
@@ -62,6 +65,14 @@
 
 
     $(function () {
+
+        function displayinfo(event,elements){
+            var name = event.title;
+            console.log(name);
+            var appointmentStart = moment(event.start).format("YYYY-MM-DD HH:mm:ss")
+            alert(name + "  " + appointmentStart)
+        }
+
         $(document).ready(async function () {
             let url = '/appointment/';
             let all;
@@ -74,6 +85,7 @@
             console.log(patient_id);
             console.log(url);
             $('#calendar').fullCalendar({
+                lang: 'pl',
                 header: {
                     left: 'prev,next today',
                     center: 'title',
@@ -92,7 +104,10 @@
                 selectHelper: true,
                 loading: function (bool) {
                     $('#loading').toggle(bool);
-                }
+                },
+                eventClick: function(event, element) {
+                    displayinfo(event, element);
+                },
             });
 
         });
