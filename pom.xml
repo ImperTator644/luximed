@@ -10,6 +10,7 @@
 		<module>reservation-service</module>
 		<module>client-service</module>
 		<module>gateway</module>
+		<module>identity-service</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -19,6 +19,9 @@ public class PersonalData {
     private String pesel;
 
     @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
