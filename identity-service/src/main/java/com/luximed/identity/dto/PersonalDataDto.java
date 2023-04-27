@@ -1,5 +1,6 @@
 package com.luximed.identity.dto;
 
+import com.luximed.identity.model.Gender;
 import lombok.Data;
 
 @Data
@@ -10,5 +11,5 @@ public class PersonalDataDto {
     private String surname;
     private String mail;
     private String phone;
-    private Integer gender;
+    private Gender gender;
 }
