@@ -24,27 +24,28 @@ public class PersonalDataController {
         return personalDataRepository.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{pesel}")
     public PersonalData getPersonalDataByPesel(@PathVariable String pesel) {
         return personalDataRepository.findPersonalDataByPesel(pesel);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
     public void addCPersonalData(@RequestParam String pesel,
-                          @RequestParam Gender gender,
-                          @RequestParam String mail,
-                          @RequestParam String name,
-                          @RequestParam String surname,
-                          @RequestParam String phone) {
-
+                                 @RequestParam Integer gender,
+                                 @RequestParam String mail,
+                                 @RequestParam String name,
+                                 @RequestParam String surname,
+                                 @RequestParam String phone,
+                                 @RequestParam String password) {
 
         PersonalData personalData = PersonalData.builder()
                 .pesel(pesel)
-                .gender(gender)
+                .gender(Gender.valueOf(gender))
                 .mail(mail)
                 .name(name)
                 .phone(phone)
                 .surname(surname)
+                .password(password)
                 .build();
         personalDataRepository.save(personalData);
     }
