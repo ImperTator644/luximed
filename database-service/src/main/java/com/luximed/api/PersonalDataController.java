@@ -31,7 +31,7 @@ public class PersonalDataController {
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
     public void addCPersonalData(@RequestParam String pesel,
-                          @RequestParam Integer gender,
+                          @RequestParam Gender gender,
                           @RequestParam String mail,
                           @RequestParam String name,
                           @RequestParam String surname,
@@ -40,7 +40,7 @@ public class PersonalDataController {
 
         PersonalData personalData = PersonalData.builder()
                 .pesel(pesel)
-                .gender(Gender.valueOf(gender))
+                .gender(gender)
                 .mail(mail)
                 .name(name)
                 .phone(phone)
