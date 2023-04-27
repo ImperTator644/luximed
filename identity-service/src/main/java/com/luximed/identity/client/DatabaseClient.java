@@ -1,5 +1,6 @@
 package com.luximed.identity.client;
 
+import com.luximed.identity.model.Gender;
 import com.luximed.identity.model.UserCredential;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public interface DatabaseClient {
 
     @PostMapping(value = "api/database/personalData/add")
     void addPersonalData(@RequestParam String pesel,
-                         @RequestParam Integer gender,
+                         @RequestParam Gender gender,
                          @RequestParam String mail,
                          @RequestParam String name,
                          @RequestParam String surname,
