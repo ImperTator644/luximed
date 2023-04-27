@@ -10,5 +10,5 @@ public class PersonalDataDto {
     private String surname;
     private String mail;
     private String phone;
-    private Gender gender;
+    private Integer gender;
 }

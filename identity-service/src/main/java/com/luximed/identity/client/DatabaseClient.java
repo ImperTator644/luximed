@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "database-service")
-public interface PersonalDataClient {
+public interface DatabaseClient {
 
     @GetMapping(value = "api/database/personalData/{pesel}")
     UserCredential getUserCredentialsByPesel(@PathVariable String pesel);

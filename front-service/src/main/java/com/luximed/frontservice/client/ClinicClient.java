@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "database-service")
 public interface ClinicClient {
-    @GetMapping(value = "/api/database/get-clinic")
-    ClinicDto getClinicById(@RequestParam("id") Integer id);
+    @GetMapping(value = "api/database/clinic/{id}")
+    ClinicDto getClinicById(@PathVariable("id") Integer id);
 
     @PostMapping(value = "/api/database/add-clinic")
     void addClinic(@RequestParam String buildingNumber,
