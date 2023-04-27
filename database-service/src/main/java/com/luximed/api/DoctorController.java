@@ -66,4 +66,8 @@ public class DoctorController {
         doctorRepository.deleteById(id);
     }
 
+    @GetMapping(value = "by-city-and-spec")
+    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specializationName, @RequestParam String city){
+        return doctorRepository.testTestTest(specializationName, city);
+    }
 }
