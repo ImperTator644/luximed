@@ -40,7 +40,7 @@ public class PersonalDataController {
 
         PersonalData personalData = PersonalData.builder()
                 .pesel(pesel)
-                .gender(Gender.valueOf(gender))
+                .gender(gender)
                 .mail(mail)
                 .name(name)
                 .phone(phone)
