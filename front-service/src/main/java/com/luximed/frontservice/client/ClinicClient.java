@@ -22,16 +22,7 @@ public interface ClinicClient {
     @PostMapping(value = "/api/database/delete-clinic")
     void deleteClinic(@RequestParam Integer id);
 
-    @GetMapping(value = "/api/database/appointment/all")
-    List<AppointmentDto> getAppointments();
-
     @GetMapping(value = "/api/database/patient/all")
     List<PatientDto> getPatients();
-
-    @GetMapping(value = "/api/database/appointment/{id}")
-    AppointmentDto getAppointmentById(@PathVariable Integer id);
-
-    @GetMapping(value = "/api/database/appointment/patient/{id}")
-    List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id);
 
 }
