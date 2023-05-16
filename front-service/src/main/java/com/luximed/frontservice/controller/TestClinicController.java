@@ -1,11 +1,10 @@
 package com.luximed.frontservice.controller;
 
 import com.luximed.frontservice.client.ClinicClient;
+import com.luximed.frontservice.dto.ClinicDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TestClinicController {
@@ -13,6 +12,12 @@ public class TestClinicController {
 
     public TestClinicController(ClinicClient clinicClient) {
         this.clinicClient = clinicClient;
+    }
+
+    @GetMapping(value="test/{id}")
+    @ResponseBody
+    public ClinicDto testTest(@PathVariable Integer id){
+        return clinicClient.getClinicById(id);
     }
 
     @GetMapping( "clinic")
