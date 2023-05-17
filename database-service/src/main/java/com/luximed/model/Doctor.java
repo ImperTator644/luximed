@@ -26,6 +26,9 @@ public class Doctor {
     @JoinColumn(nullable = false)
     private List<Specialization> specialization;
 
+    @ManyToMany
+    @JoinColumn(nullable = false)
+    private List<Clinic> clinics;
     public Doctor() {
 
     }
