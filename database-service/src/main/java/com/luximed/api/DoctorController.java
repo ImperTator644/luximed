@@ -36,6 +36,11 @@ public class DoctorController {
         return doctorRepository.findAll();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/by-spec/{specialization}")
+    public List<Doctor> getDoctorsBySpecialization(@PathVariable String specialization) {
+        return doctorRepository.getDoctorsBySpecialization(specialization);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Doctor getDoctorById(@PathVariable Integer id) {
         return doctorRepository.findById(id).orElse(null);
@@ -66,4 +71,8 @@ public class DoctorController {
         doctorRepository.deleteById(id);
     }
 
+    @GetMapping(value = "by-city-and-spec")
+    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specializationName, @RequestParam String city){
+        return doctorRepository.getDoctorBySpecializationAndCity(specializationName, city);
+    }
 }
