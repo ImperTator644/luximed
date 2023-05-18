@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,9 @@ public class AppointmentDto {
     private DoctorDto doctor;
     private ClinicDto clinic;
     private LocalDate date;
-    private LocalDateTime time;
+    private LocalTime time;
+    private LocalTime start, end;
+    private String title;
     private AppointmentTypeDto appointmentType;
 
 }

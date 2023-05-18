@@ -6,9 +6,8 @@ import com.luximed.repository.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Tag(name = "appointment", description = "Appointment API")
@@ -49,6 +48,11 @@ public class AppointmentController {
         return appointmentRepository.getAppointmentsByPatientId(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/doctor/{id}")
+    public List<Appointment> getAppointmentsByDoctorId(@PathVariable Integer id){
+        return appointmentRepository.getAppointmentsByDoctorId(id);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
     public void addAppointment(@RequestParam Integer patientId,
@@ -63,12 +67,12 @@ public class AppointmentController {
         AppointmentType appointmentType = appointmentTypeRepository.findById(appointmentTypeId).orElseThrow(() -> new DatabaseException());
 
         LocalDate localDate = LocalDate.parse(date);
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime);
+        LocalTime localTime = LocalTime.parse(dateTime);
 
         Appointment appointment = Appointment.builder()
                 .patient(patient)
                 .date(localDate)
-                .time(localDateTime)
+                .time(localTime)
                 .clinic(clinic)
                 .doctor(doctor)
                 .appointmentType(appointmentType)
