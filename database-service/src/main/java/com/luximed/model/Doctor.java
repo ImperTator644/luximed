@@ -24,7 +24,7 @@ public class Doctor {
 
     @ManyToMany
     @JoinColumn(nullable = false)
-    private List<Specialization> specialization;
+    private List<Specialization> specializations;
 
     @ManyToMany
     @JoinColumn(nullable = false)
