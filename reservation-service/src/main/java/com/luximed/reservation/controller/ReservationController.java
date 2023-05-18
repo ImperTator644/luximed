@@ -39,7 +39,4 @@ public class ReservationController {
         return databaseClient.getDoctorsBySpecializationAndCity(specializationName, city);
     }
 
-
-
-
 }

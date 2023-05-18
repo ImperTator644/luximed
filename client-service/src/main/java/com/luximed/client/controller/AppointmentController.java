@@ -24,8 +24,8 @@ public class AppointmentController {
             dto.setTitle(dto.getAppointmentType().getName() + " - " +
                     dto.getPatient().getPersonalData().getName() + " " +
                     dto.getPatient().getPersonalData().getSurname());
-            dto.setStart(dto.getTime());
-            dto.setEnd(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration()));
+            dto.setStart(dto.getDate().atTime(dto.getTime()));
+            dto.setEnd(dto.getDate().atTime(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration())));
         }
         return list;
     }
@@ -44,8 +44,8 @@ public class AppointmentController {
             dto.setTitle(dto.getAppointmentType().getName() + " - " +
                     dto.getPatient().getPersonalData().getName() + " " +
                     dto.getPatient().getPersonalData().getSurname());
-            dto.setStart(dto.getTime());
-            dto.setEnd(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration()));
+            dto.setStart(dto.getDate().atTime(dto.getTime()));
+            dto.setEnd(dto.getDate().atTime(dto.getTime().plusMinutes(dto.getAppointmentType().getDuration())));
         }
         return list;
     }
