@@ -16,6 +16,8 @@ public class AppointmentDto {
     private ClinicDto clinic;
     private LocalDate date;
     private LocalDateTime time;
+    private LocalDateTime start, end;
+    private String title;
     private AppointmentTypeDto appointmentType;
 
 }

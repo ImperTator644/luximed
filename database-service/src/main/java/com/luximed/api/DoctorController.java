@@ -31,20 +31,6 @@ public class DoctorController {
         this.specializationRepository = specializationRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/by-spec/{specialization}")
-    public List<Doctor> getDoctorsBySpecialization(@PathVariable String specialization) {
-        return doctorRepository.getDoctorsBySpecialization(specialization);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Doctor getDoctorById(@PathVariable Integer id) {
-        return doctorRepository.findById(id).orElse(null);
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
     public void addDoctor(@RequestParam String pesel,
@@ -66,13 +52,35 @@ public class DoctorController {
         doctorRepository.save(doctor);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public Doctor getDoctorById(@PathVariable Integer id) {
+        return doctorRepository.findById(id).orElse(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/by-spec/{specialization}")
+    public List<Doctor> getDoctorsBySpecialization(@PathVariable String specialization) {
+        return doctorRepository.getDoctorsBySpecialization(specialization);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/by-city/{city}")
+    public List<Doctor> getDoctorsByCity(@PathVariable String city) {
+        return doctorRepository.getDoctorsByCity(city);
+    }
+
+    @GetMapping(value = "by-city-and-spec")
+    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specializationName, @RequestParam String city) {
+        return doctorRepository.getDoctorBySpecializationAndCity(specializationName, city);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")
     public void deleteDoctor(@RequestParam Integer id) {
         doctorRepository.deleteById(id);
     }
 
-    @GetMapping(value = "by-city-and-spec")
-    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specializationName, @RequestParam String city){
-        return doctorRepository.getDoctorBySpecializationAndCity(specializationName, city);
-    }
+
 }

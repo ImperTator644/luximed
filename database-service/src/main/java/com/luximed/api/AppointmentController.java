@@ -49,6 +49,11 @@ public class AppointmentController {
         return appointmentRepository.getAppointmentsByPatientId(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/doctor/{id}")
+    public List<Appointment> getAppointmentsByDoctorId(@PathVariable Integer id){
+        return appointmentRepository.getAppointmentsByDoctorId(id);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
     public void addAppointment(@RequestParam Integer patientId,

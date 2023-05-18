@@ -26,9 +26,13 @@ public class ReservationController {
     public List<ClinicDto> getClinicsByCity(@PathVariable("city") String city){
         return databaseClient.getClinicsByCity(city);
     }
-    @GetMapping(value = "doctors/{specialization}")
+    @GetMapping(value = "doctors/spec/{specialization}")
     public List<DoctorDto> getDoctorsBySpecialization(@PathVariable("specialization") String specialization){
         return databaseClient.getDoctorsBySpecialization(specialization);
+    }
+    @GetMapping(value = "doctors/city/{city}")
+    public List<DoctorDto> getDoctorsByCity(@PathVariable("city") String city){
+        return databaseClient.getDoctorsByCity(city);
     }
     @GetMapping(value = "doctors/by-city-and-spec")
     public List<DoctorDto> getDoctorsBySpecializationAndCity(@RequestParam String specializationName, @RequestParam String city){
