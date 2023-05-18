@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Component
@@ -14,7 +15,7 @@ public class AppointmentDto {
     private DoctorDto doctor;
     private ClinicDto clinic;
     private LocalDate date;
-    private LocalDateTime time;
+    private LocalTime time;
     private LocalDateTime start, end;
     private String title;
     private AppointmentTypeDto appointmentType;
