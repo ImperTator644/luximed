@@ -1,17 +1,15 @@
 package com.luximed.api;
 
-import com.luximed.model.Doctor;
-import com.luximed.model.PersonalData;
-import com.luximed.model.Specialization;
-import com.luximed.repository.DoctorRepository;
-import com.luximed.repository.PersonalDataRepository;
-import com.luximed.repository.SpecializationRepository;
+import com.luximed.exception.DatabaseException;
+import com.luximed.model.*;
+import com.luximed.repository.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Tag(name = "doctor", description = "Doctor API")
@@ -22,13 +20,16 @@ public class DoctorController {
     private final DoctorRepository doctorRepository;
     private final PersonalDataRepository personalDataRepository;
     private final SpecializationRepository specializationRepository;
+    private final ClinicRepository clinicRepository;
 
     public DoctorController(DoctorRepository doctorRepository,
                             PersonalDataRepository personalDataRepository,
-                            SpecializationRepository specializationRepository) {
+                            SpecializationRepository specializationRepository,
+                            ClinicRepository clinicRepository) {
         this.doctorRepository = doctorRepository;
         this.personalDataRepository = personalDataRepository;
         this.specializationRepository = specializationRepository;
+        this.clinicRepository = clinicRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
@@ -61,8 +62,36 @@ public class DoctorController {
 
         Doctor doctor = Doctor.builder()
                 .personalData(personalData)
-                .specialization(specializationList)
+                .specializations(specializationList)
                 .build();
+        doctorRepository.save(doctor);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "add-clinic")
+    public void addClinicToDoctor(@RequestParam Integer doctorId,
+                          @RequestParam Integer clinicId) {
+        Clinic clinic = clinicRepository.findById(clinicId).orElse(null);
+        Doctor doctor = doctorRepository.findById(doctorId).orElse(null);
+
+        if (isNull(clinic) || isNull(doctor)) {
+            throw new DatabaseException("There is no clinic or doctor with such ID");
+        }
+
+        doctor.getClinics().add(clinic);
+        doctorRepository.save(doctor);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "add-specialization")
+    public void addSpecializationToDoctor(@RequestParam Integer doctorId,
+                                  @RequestParam Integer specializationId) {
+        Doctor doctor = doctorRepository.findById(doctorId).orElse(null);
+        Specialization specialization = specializationRepository.findById(specializationId).orElse(null);
+
+        if (isNull(specialization) || isNull(doctor)) {
+            throw new DatabaseException("There is no specialization or doctor with such ID");
+        }
+
+        doctor.getSpecializations().add(specialization);
         doctorRepository.save(doctor);
     }
 
