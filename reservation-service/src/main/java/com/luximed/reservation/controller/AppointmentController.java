@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,14 +30,14 @@ public class AppointmentController {
                               @RequestParam Integer doctorId,
                               @RequestParam Integer appointmentTypeId) throws IllegalAppointmentTimeException {
 
-        LocalDate dateAppointment = LocalDate.parse(date);
+        LocalDate appointmentDate = LocalDate.parse(date);
         Integer duration = getAppointmentType(appointmentTypeId).getDuration();
-        LocalDateTime start = LocalDateTime.parse(dateTime);
-        LocalDateTime end = LocalDateTime.parse(dateTime).plusMinutes(duration);
+        LocalTime start = LocalTime.parse(dateTime);
+        LocalTime end = LocalTime.parse(dateTime).plusMinutes(duration);
 
         List<AppointmentDto> doctorAppointments = getAppointmentsByDoctorId(doctorId);
         List<AppointmentDto> doctorAppointmentsToday = doctorAppointments.stream()
-                .filter(d -> d.getDate().equals(dateAppointment))
+                .filter(d -> d.getDate().equals(appointmentDate))
                 .collect(Collectors.toList());
 
         for (AppointmentDto dto : doctorAppointmentsToday){

@@ -6,7 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -35,7 +35,7 @@ public class Appointment {
     private LocalDate date;
 
     @Column(nullable = false)
-    private LocalDateTime time;
+    private LocalTime time;
 
     @ManyToOne
     @JoinColumn(nullable = false)
