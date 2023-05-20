@@ -11,5 +11,6 @@ public class PersonalDataDto {
     private String surname;
     private String mail;
     private String phone;
+    private String password;
     private Gender gender;
 }

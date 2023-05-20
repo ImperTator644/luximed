@@ -1,9 +1,10 @@
 package com.luximed.client.appointment;
 
 import com.luximed.client.dto.AppointmentDto;
+import com.luximed.client.dto.PersonalDataDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,4 +19,10 @@ public interface ClientDatabase {
 
     @GetMapping(value = "/api/database/appointment/patient/{id}")
     List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/api/database/personalData/update")
+    ResponseEntity<String> updatePersonalData(@RequestBody PersonalDataDto personalDataDto);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/api/database/personalData/delete")
+    ResponseEntity<String> deletePersonaldata(@RequestParam String pesel);
 }
