@@ -1,11 +1,9 @@
 package com.luximed.gateway.controller;
 
+import com.luximed.gateway.model.CustomUserDetails;
 import com.luximed.gateway.model.UserCredential;
 import com.luximed.gateway.service.AuthService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AuthController {
@@ -16,10 +14,10 @@ public class AuthController {
         this.authService = authService;
     }
 
-//    @PostMapping(value = "register")
-//    public boolean addNewPatient(@RequestBody PersonalDataDto personalDataDto) {
-//        return authService.savePatient(personalDataDto);
-//    }
+    @PostMapping(value = "auth/register")
+    public boolean addNewPatient(@RequestBody CustomUserDetails userDetails) {
+        return authService.savePatient(userDetails);
+    }
 
     @PostMapping(value = "login")
     public String getToken(UserCredential userCredential) {

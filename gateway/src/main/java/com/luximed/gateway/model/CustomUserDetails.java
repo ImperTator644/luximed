@@ -1,5 +1,6 @@
-package com.luximed.gateway.config;
+package com.luximed.gateway.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.luximed.gateway.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Id
     @Column("pesel")
+    @JsonProperty("pesel")
     private String username;
     private String password;
     private String name;

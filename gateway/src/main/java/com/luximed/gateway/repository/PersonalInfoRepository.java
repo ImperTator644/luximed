@@ -1,6 +1,6 @@
 package com.luximed.gateway.repository;
 
-import com.luximed.gateway.config.CustomUserDetails;
+import com.luximed.gateway.model.CustomUserDetails;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import reactor.core.publisher.Mono;

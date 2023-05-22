@@ -1,6 +1,8 @@
 package com.luximed.gateway.service;
 
-import com.luximed.gateway.client.DatabaseClient;
+import com.luximed.gateway.client.DBClient;
+import com.luximed.gateway.model.CustomUserDetails;
+import com.luximed.gateway.repository.PersonalInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,22 +11,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final DatabaseClient databaseClient;
+    private final DBClient dbClient;
+    private final PersonalInfoRepository personalInfoRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-//    public boolean savePatient(PersonalDataDto personalData) {
-//        personalData.setPassword(passwordEncoder.encode(personalData.getPassword()));
-//        databaseClient.addPersonalData(personalData.getPesel(),
-//                personalData.getGender(),
-//                personalData.getMail(),
-//                personalData.getName(),
-//                personalData.getSurname(),
-//                personalData.getPhone(),
-//                personalData.getPassword());
-//        databaseClient.addPatient(personalData.getPesel());
-//        return true;
-//    }
+    public boolean savePatient(CustomUserDetails personalData) {
+        personalData.setPassword(passwordEncoder.encode(personalData.getPassword()));
+        dbClient.savePersonalData(personalData);
+        dbClient.savePatient(personalData.getUsername());
+        return true;
+    }
 
     public String generateToken(String pesel){
         return jwtService.generateToken(pesel);
