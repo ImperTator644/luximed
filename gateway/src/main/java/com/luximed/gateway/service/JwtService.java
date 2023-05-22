@@ -1,4 +1,4 @@
-package com.luximed.identity.service;
+package com.luximed.gateway.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

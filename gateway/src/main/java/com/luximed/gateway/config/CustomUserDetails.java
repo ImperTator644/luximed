@@ -1,34 +1,38 @@
-package com.luximed.identity.config;
+package com.luximed.gateway.config;
 
-import com.luximed.identity.model.UserCredential;
+import com.luximed.gateway.model.Gender;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Data
+@Table("personal_data")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CustomUserDetails implements UserDetails {
 
-    private final String pesel;
-    private final String password;
-
-    public CustomUserDetails(UserCredential userCredential){
-        this.pesel = userCredential.getPesel();
-        this.password = userCredential.getPassword();
-    }
+    @Id
+    @Column("pesel")
+    private String username;
+    private String password;
+    private String name;
+    private String surname;
+    private String mail;
+    private String phone;
+    private Gender gender;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return pesel;
     }
 
     @Override

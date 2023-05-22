@@ -1,5 +1,6 @@
-package com.luximed.identity.model;
+package com.luximed.gateway.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserCredential {
-    private String pesel;
+    @JsonProperty("pesel")
+    private String username;
     private String password;
 }

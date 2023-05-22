@@ -1,4 +1,4 @@
-package com.luximed.identity.model;
+package com.luximed.gateway.model;
 
 public enum Gender {
     MALE,

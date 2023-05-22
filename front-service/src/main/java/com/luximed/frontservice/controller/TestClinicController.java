@@ -1,17 +1,30 @@
 package com.luximed.frontservice.controller;
 
+import com.luximed.frontservice.client.AuthClient;
 import com.luximed.frontservice.client.ClinicClient;
 import com.luximed.frontservice.dto.ClinicDto;
+import com.luximed.frontservice.dto.MessageDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Slf4j
 public class TestClinicController {
     private final ClinicClient clinicClient;
+    private final AuthClient authClient;
 
-    public TestClinicController(ClinicClient clinicClient) {
+    public TestClinicController(ClinicClient clinicClient, AuthClient authClient) {
         this.clinicClient = clinicClient;
+        this.authClient = authClient;
+    }
+
+    @GetMapping(value="/")
+    @ResponseBody
+    public String gowno(@RequestHeader("loggedInUser") String currentUser){
+        log.info("CURRENT USER +_+_+_+_+ " + currentUser);
+        return currentUser;
     }
 
     @GetMapping(value="test/{id}")
