@@ -24,6 +24,8 @@ public class AuthConfig {
 
     @Autowired
     private PersonalInfoRepository personalInfoRepository;
+    @Autowired
+    private CurrentUser currentUser;
 
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
@@ -37,7 +39,6 @@ public class AuthConfig {
                     @Override
                     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
                         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                        CurrentUser currentUser = CurrentUser.getInstance();
                         currentUser.setUserName(userDetails.getUsername());
                         return super.onAuthenticationSuccess(webFilterExchange, authentication);
                     }
@@ -47,7 +48,6 @@ public class AuthConfig {
                 .logoutSuccessHandler(new RedirectServerLogoutSuccessHandler() {
                     @Override
                     public Mono<Void> onLogoutSuccess(WebFilterExchange exchange, Authentication authentication) {
-                        CurrentUser currentUser = CurrentUser.getInstance();
                         currentUser.setUserName(null);
                         return super.onLogoutSuccess(exchange, authentication);
                     }
