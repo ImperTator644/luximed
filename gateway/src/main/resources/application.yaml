@@ -11,5 +11,3 @@ spring:
           uri: lb://FRONT-SERVICE
           predicates:
             - Path=/**
-          filters:
-            - AuthenticationFilter

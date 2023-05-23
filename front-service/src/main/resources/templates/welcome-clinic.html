@@ -1,20 +1,19 @@
 <!doctype html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Welcome clinic</title>
+        <div th:replace="fragment/general.html :: headerFragment" th:remove="tag"></div>
+        <title>Welcome clinic test</title>
     </head>
     <body>
-        <div>
-            <p>Added clinic</p>
-            <p th:inline="text">Building number: [[${buildingNumber}]]</p>
-            <p th:inline="text">City: [[*{city}]]</p>
-            <p th:inline="text">Street: [[*{street}]]</p>
-            <p th:inline="text">PostalCode: [[*{postalCode}]]</p>
+        <div class="container">
+            <div th:replace="fragment/general.html :: navigation-bar" id="navigation"></div>
+            <div>
+                <p>Added clinic</p>
+                <p th:inline="text">Building number: [[${buildingNumber}]]</p>
+                <p th:inline="text">City: [[*{city}]]</p>
+                <p th:inline="text">Street: [[*{street}]]</p>
+                <p th:inline="text">PostalCode: [[*{postalCode}]]</p>
+            </div>
         </div>
     </body>
 </html>

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PACJENTO</title>
-</head>
-<body>
-<p>Patient</p>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="fragment/general.html :: headerFragment" th:remove="tag"></div>
+        <title>Pacjent test</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:replace="fragment/general.html :: navigation-bar" id="navigation"></div>
 
-<div>
-    <form th:method="post" th:action="@{/appointment/patient}">
-        Patient Id: <input type="number" name="id" />
-        <input type="submit" value="Show Patient Calendar"/>
-    </form>
-</div>
-</body>
+            <p>Patient</p>
+            <div>
+                <form th:method="post" th:action="@{/appointment/patient}">
+                    Patient Id: <input type="number" name="id"/>
+                    <input type="submit" value="Show Patient Calendar"/>
+                </form>
+            </div>
+
+        </div>
+    </body>
 </html>
