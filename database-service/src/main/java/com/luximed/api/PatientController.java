@@ -34,7 +34,7 @@ public class PatientController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public void addPatient(@RequestParam String pesel) {
+    public void addPatient(@RequestBody String pesel) {
         PersonalData personalData = personalDataRepository.findPersonalDataByPesel(pesel);
 
         Patient patient = Patient.builder()

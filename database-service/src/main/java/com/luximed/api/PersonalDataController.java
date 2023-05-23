@@ -1,6 +1,5 @@
 package com.luximed.api;
 
-import com.luximed.model.Gender;
 import com.luximed.model.PersonalData;
 import com.luximed.repository.PersonalDataRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,23 +29,7 @@ public class PersonalDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public void addCPersonalData(@RequestParam String pesel,
-                                 @RequestParam Gender gender,
-                                 @RequestParam String mail,
-                                 @RequestParam String name,
-                                 @RequestParam String surname,
-                                 @RequestParam String phone,
-                                 @RequestParam String password) {
-
-        PersonalData personalData = PersonalData.builder()
-                .pesel(pesel)
-                .gender(gender)
-                .mail(mail)
-                .name(name)
-                .phone(phone)
-                .surname(surname)
-                .password(password)
-                .build();
+    public void addCPersonalData(@RequestBody PersonalData personalData) {
         personalDataRepository.save(personalData);
     }
 

@@ -2,19 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <div th:replace="fragment/general.html :: headerFragment" th:remove="tag"></div>
-        <title>Pacjent test</title>
+        <title id="pageTitle">Luximed main page</title>
     </head>
     <body>
         <div class="container">
+
             <div th:replace="fragment/general.html :: navigation-bar" id="navigation"></div>
 
-            <p>Patient</p>
-            <div>
-                <form th:method="post" th:action="@{/appointment/patient}">
-                    Patient Id: <input type="number" name="id"/>
-                    <input type="submit" value="Show Patient Calendar"/>
-                </form>
-            </div>
+            <h1>MAIN PAGE</h1>
+            <h2>Witaj, <span th:text="${@thymeleaf.getCurrentUserPesel()}"></span></h2>
 
         </div>
     </body>
