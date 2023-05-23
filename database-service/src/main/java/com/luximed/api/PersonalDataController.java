@@ -3,9 +3,13 @@ package com.luximed.api;
 import com.luximed.model.PersonalData;
 import com.luximed.repository.PersonalDataRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @Tag(name = "personal data", description = "Personal data API")
 @RestController
@@ -29,13 +33,25 @@ public class PersonalDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public void addCPersonalData(@RequestBody PersonalData personalData) {
+    public void addPersonalData(@RequestBody PersonalData personalData) {
         personalDataRepository.save(personalData);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")
-    public void deletePersonalData(@RequestParam Integer id) {
-        personalDataRepository.deleteById(id);
+    public ResponseEntity<String> deletePersonalData(@RequestParam String pesel) {
+        if (isNull(personalDataRepository.findPersonalDataByPesel(pesel))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is no personal data with pesel: " + pesel);
+        }
+        personalDataRepository.deleteByPesel(pesel);
+        return ResponseEntity.status(HttpStatus.OK).body("Personal data deleted");
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/update")
+    public ResponseEntity<String> updatePersonalData(@RequestBody PersonalData personalData) {
+        if (isNull(personalDataRepository.findPersonalDataByPesel(personalData.getPesel()))) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is no personal data with pesel: " + personalData.getPesel());
+        }
+        personalDataRepository.save(personalData);
+        return ResponseEntity.status(HttpStatus.OK).body("Personal data updated");
+    }
 }
