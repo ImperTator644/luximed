@@ -1,19 +1,23 @@
 package com.luximed.frontservice.controller;
 
+import com.luximed.frontservice.client.ClientService;
 import com.luximed.frontservice.client.ClinicClient;
 import com.luximed.frontservice.dto.PatientDto;
+import com.luximed.frontservice.dto.PersonalDataDto;
+import com.luximed.frontservice.model.CurrentUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 @Controller
+@RequiredArgsConstructor
 public class ClientController {
     private final ClinicClient clinicClient;
-
-    public ClientController(ClinicClient clinicClient) {
-        this.clinicClient = clinicClient;
-    }
+    private final ClientService clientService;
+    private final CurrentUser currentUser;
 
     @GetMapping("patient/all")
     @ResponseBody
@@ -21,9 +25,12 @@ public class ClientController {
         return clinicClient.getPatients();
     }
 
-    @GetMapping("patient")
-    public String getPatient(){
-        return "patient";
+    @GetMapping("profile")
+    public ModelAndView getPatient(){
+        ModelAndView mav = new ModelAndView("user-profile");
+        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUser.getUserName());
+        mav.addObject("user",dataDto);
+        return mav;
     }
 
 }

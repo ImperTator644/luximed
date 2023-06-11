@@ -35,7 +35,7 @@ public class AuthConfig {
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
         return http.csrf().disable()
                 .authorizeExchange()
-                .pathMatchers("/register", "/", "/images/**", "/js/**", "/css/**").permitAll()
+                .pathMatchers("/auth/register", "/", "/images/**", "/js/**", "/css/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .formLogin()

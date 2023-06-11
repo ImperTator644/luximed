@@ -1,0 +1,17 @@
+#user-info{
+    text-align: center;
+    margin: 10% 10%;
+    background-color: bisque;
+    border-radius: 16px;
+    padding: 1%;
+}
+
+p{
+    font-size: x-large;
+    font-weight: bold;
+    padding: 1%;
+    background-color: rgb(255, 241, 224);
+    margin: 2% auto;
+    max-width: 70%;
+    border-radius: 16px;
+}

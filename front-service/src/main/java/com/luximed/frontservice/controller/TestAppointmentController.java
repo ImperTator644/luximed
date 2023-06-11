@@ -1,10 +1,8 @@
 package com.luximed.frontservice.controller;
 
-import com.luximed.frontservice.client.ClientService
-    ;
+import com.luximed.frontservice.client.ClientService;
 import com.luximed.frontservice.dto.AppointmentDto;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
