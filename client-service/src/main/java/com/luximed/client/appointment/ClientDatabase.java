@@ -17,8 +17,11 @@ public interface ClientDatabase {
     @GetMapping(value = "/api/database/appointment/{id}")
     AppointmentDto getAppointmentById(@PathVariable Integer id);
 
-    @GetMapping(value = "/api/database/appointment/patient/{id}")
-    List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id);
+    @GetMapping(value = "/api/database/personalData/{pesel}")
+    PersonalDataDto getPersonalDataByPesel(@PathVariable String pesel);
+
+    @GetMapping(value = "/api/database/appointment/patient/{pesel}")
+    List<AppointmentDto> getAppointmentsByPesel(@PathVariable String pesel);
 
     @RequestMapping(method = RequestMethod.PUT, value = "/api/database/personalData/update")
     ResponseEntity<String> updatePersonalData(@RequestBody PersonalDataDto personalDataDto);
