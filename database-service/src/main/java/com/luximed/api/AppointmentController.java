@@ -43,9 +43,9 @@ public class AppointmentController {
         return appointmentRepository.findById(id).orElse(null);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/patient/{id}")
-    public List<Appointment> getAppointmentsByPatientId(@PathVariable Integer id){
-        return appointmentRepository.getAppointmentsByPatientId(id);
+    @RequestMapping(method = RequestMethod.GET, value = "/patient/{pesel}")
+    public List<Appointment> getAppointmentsByPesel(@PathVariable String pesel){
+        return appointmentRepository.getAppointmentsByPesel(pesel);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/doctor/{id}")

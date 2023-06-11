@@ -17,8 +17,8 @@ public interface ClientService {
     @GetMapping(value = "/api/client/appointment/{id}")
     AppointmentDto getAppointmentById(@PathVariable Integer id);
 
-    @GetMapping(value = "/api/client/appointment/patient/{id}")
-    List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id);
+    @GetMapping(value = "/api/client/appointment/patient/{pesel}")
+    List<AppointmentDto> getAppointmentsByPesel(@PathVariable String pesel);
 
     @GetMapping(value = "/api/client/personalData/{pesel}")
     PersonalDataDto getPersonalDataByPesel(@PathVariable String pesel);

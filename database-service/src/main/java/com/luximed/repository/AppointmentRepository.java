@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    @Query(value = "SELECT * FROM Appointment a WHERE a.patient_id = ?1",nativeQuery = true)
-    List<Appointment> getAppointmentsByPatientId(Integer id);
+    @Query(value = "SELECT * FROM Appointment a JOIN patient p on a.patient_id = p.id WHERE p.personal_data_pesel = ?1",nativeQuery = true)
+    List<Appointment> getAppointmentsByPesel(String pesel);
 
     @Query(value = "SELECT * FROM Appointment a WHERE a.doctor_id = ?1",nativeQuery = true)
     List<Appointment> getAppointmentsByDoctorId(Integer id);

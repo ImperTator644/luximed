@@ -34,17 +34,10 @@ public class TestAppointmentController {
         return clientService.getAppointmentById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "appointment/patient/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "appointment/patient/{pesel}")
     @ResponseBody
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id) {
-        return clientService.getAppointmentsByPatientId(id);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "appointment/patient")
-    public ModelAndView getAppointmentsByPatientIdTwo(@RequestParam Integer id) {
-        ModelAndView mav = new ModelAndView("calendar");
-        mav.addObject("id", id);
-        return mav;
+    public List<AppointmentDto> getAppointmentsByPesel(@PathVariable String pesel) {
+        return clientService.getAppointmentsByPesel(pesel);
     }
 
 }

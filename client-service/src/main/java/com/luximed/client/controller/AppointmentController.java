@@ -36,10 +36,10 @@ public class AppointmentController {
         return client.getAppointmentById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/patient/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/patient/{pesel}")
     @ResponseBody
-    public List<AppointmentDto> getAppointmentsByPatientId(@PathVariable Integer id) {
-        List<AppointmentDto> list = client.getAppointmentsByPatientId(id);
+    public List<AppointmentDto> getAppointmentsByPesel(@PathVariable String pesel) {
+        List<AppointmentDto> list = client.getAppointmentsByPesel(pesel);
         for(AppointmentDto dto : list){
             dto.setTitle(dto.getAppointmentType().getName() + " - " +
                     dto.getPatient().getPersonalData().getName() + " " +
