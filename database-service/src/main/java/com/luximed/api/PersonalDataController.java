@@ -51,6 +51,8 @@ public class PersonalDataController {
         if (isNull(personalDataRepository.findPersonalDataByPesel(personalData.getPesel()))) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is no personal data with pesel: " + personalData.getPesel());
         }
+        String pass = personalDataRepository.findPersonalDataByPesel(personalData.getPesel()).getPassword();
+        personalData.setPassword(pass);
         personalDataRepository.save(personalData);
         return ResponseEntity.status(HttpStatus.OK).body("Personal data updated");
     }
