@@ -16,11 +16,10 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public boolean savePatient(CustomUserDetails personalData) {
+    public void savePatient(CustomUserDetails personalData) {
         personalData.setPassword(passwordEncoder.encode(personalData.getPassword()));
         dbClient.savePersonalData(personalData);
         dbClient.savePatient(personalData.getUsername());
-        return true;
     }
 
     public String generateToken(String pesel){

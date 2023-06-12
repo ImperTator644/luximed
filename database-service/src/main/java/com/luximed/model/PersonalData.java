@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Data
@@ -25,6 +26,7 @@ public class PersonalData {
     @Column(nullable = false)
     private String surname;
 
+    @Email
     @Column(nullable = false)
     private String mail;
 

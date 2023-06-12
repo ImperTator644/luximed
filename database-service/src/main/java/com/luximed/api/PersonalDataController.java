@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -33,7 +34,7 @@ public class PersonalDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public void addPersonalData(@RequestBody PersonalData personalData) {
+    public void addPersonalData(@RequestBody @Valid PersonalData personalData) {
         personalDataRepository.save(personalData);
     }
 
