@@ -14,7 +14,12 @@
                     <p>Nazwisko: <input type="text" name="surname" th:value="${user.surname}" /></p>
                     <p>E-mail: <input type="text" name="mail" th:value="${user.mail}" /></p>
                     <p>Nr telefonu: <input type="text" name="phone" th:value="${user.phone}" /></p>
-                    <p>Płeć: <input type="text" name="gender" th:value="${user.gender}" /></p>
+                    <p>Płeć:
+                        <select name="gender">
+                            <option value="MALE" th:selected="${user.gender == 'MALE'}">MALE</option>
+                            <option value="FEMALE" th:selected="${user.gender == 'FEMALE'}">FEMALE</option>
+                        </select>
+                    </p>
                     <p>Pesel: <input type="text" name="pesel" th:value="${user.username}" /></p>
                     <button type="submit" value="Update client data">Zapisz</button>
                 </form>
