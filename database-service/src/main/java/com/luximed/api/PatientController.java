@@ -48,4 +48,9 @@ public class PatientController {
         patientRepository.deleteById(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/pesel/{pesel}")
+    public Patient getPatientByPesel(@PathVariable String pesel) {
+        return patientRepository.getPatientByPersonalDataPesel(pesel);
+    }
+
 }

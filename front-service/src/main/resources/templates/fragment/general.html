@@ -38,24 +38,28 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" th:href="@{/profile}">Moje dane</a>
                                 <a class="dropdown-item" th:href="@{/my-calendar}">Mój kalendarz</a>
+                                <a class="dropdown-item" th:href="@{/my/appointments}">My appointments</a>
                             </div>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/find-doctors}">Make an appointment</a>
+                        </li>
                     </ul>
-                    <div th:if="${loggedUser == emptyUser}">
-                        <form class="form-inline my-2 my-lg-0" method="post" action="/login">
-                            <label for="username" class="sr-only">Pesel</label>
-                            <input type="text" id="username" name="username" class="form-control ml-1"
-                                   placeholder="Pesel" required autofocus>
-                            <label for="password" class="sr-only">Password</label>
-                            <input type="password" id="password" name="password" class="form-control ml-1"
-                                   placeholder="Password" required>
-                            <button class="btn btn-success my-2 ml-1 my-sm-0" type="submit">Sign in</button>
-                            <a th:href="@{/register}" class="btn btn-warning ml-1">Register</a>
-                        </form>
-                    </div>
-                    <div th:unless="${loggedUser == emptyUser}">
-                        <a th:href="@{/logout}" class="btn btn-success">Logout</a>
-                    </div>
+                </div>
+                <div th:if="${loggedUser == emptyUser}">
+                    <form class="form-inline my-2 my-lg-0" method="post" action="/login">
+                        <label for="username" class="sr-only">Pesel</label>
+                        <input type="text" id="username" name="username" class="form-control ml-1"
+                               placeholder="Pesel" required autofocus>
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control ml-1"
+                               placeholder="Password" required>
+                        <button class="btn btn-success my-2 ml-1 my-sm-0" type="submit">Sign in</button>
+                        <a th:href="@{/register}" class="btn btn-warning ml-1">Register</a>
+                    </form>
+                </div>
+                <div th:unless="${loggedUser == emptyUser}">
+                    <a th:href="@{/logout}" class="btn btn-success">Logout</a>
                 </div>
             </nav>
         </div>

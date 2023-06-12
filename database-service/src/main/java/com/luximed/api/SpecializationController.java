@@ -1,8 +1,6 @@
 package com.luximed.api;
 
-import com.luximed.model.AppointmentType;
 import com.luximed.model.Specialization;
-import com.luximed.repository.AppointmentTypeRepository;
 import com.luximed.repository.SpecializationRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +13,9 @@ import java.util.List;
 public class SpecializationController {
 
     private final SpecializationRepository specializationRepository;
-    private final AppointmentTypeRepository appointmentTypeRepository;
 
-    public SpecializationController(SpecializationRepository specializationRepository,
-                                    AppointmentTypeRepository appointmentTypeRepository) {
+    public SpecializationController(SpecializationRepository specializationRepository) {
         this.specializationRepository = specializationRepository;
-        this.appointmentTypeRepository = appointmentTypeRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
@@ -41,10 +36,6 @@ public class SpecializationController {
         specializationRepository.save(specialization);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "appointment-types/{id}")
-    public List<AppointmentType> getAllAppointmentTypesByDoctor(@PathVariable Integer id) {
-        return appointmentTypeRepository.getAppointmentTypesBySpecializationId(id);
-    }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")
     public void deleteSpecialization(@RequestParam Integer id) {

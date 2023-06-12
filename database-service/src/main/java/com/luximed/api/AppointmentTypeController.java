@@ -8,7 +8,6 @@ import com.luximed.repository.SpecializationRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Tag(name = "appointment type", description = "Appointment type API")
@@ -33,6 +32,11 @@ public class AppointmentTypeController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public AppointmentType getAppointmentTypeById(@PathVariable Integer id) {
         return appointmentTypeRepository.findById(id).orElse(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/spec/{specialization}")
+    public List<AppointmentType> getAppointmentTypesBySpecId(@PathVariable String specialization) {
+        return appointmentTypeRepository.getAppointmentTypesBySpecializationName(specialization);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")

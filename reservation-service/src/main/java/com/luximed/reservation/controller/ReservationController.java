@@ -3,6 +3,7 @@ package com.luximed.reservation.controller;
 import com.luximed.reservation.client.DatabaseClient;
 import com.luximed.reservation.dto.ClinicDto;
 import com.luximed.reservation.dto.DoctorDto;
+import com.luximed.reservation.dto.PatientDto;
 import com.luximed.reservation.dto.SpecializationDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,17 +27,25 @@ public class ReservationController {
     public List<ClinicDto> getClinicsByCity(@PathVariable("city") String city){
         return databaseClient.getClinicsByCity(city);
     }
-    @GetMapping(value = "doctors/spec/{specialization}")
-    public List<DoctorDto> getDoctorsBySpecialization(@PathVariable("specialization") String specialization){
-        return databaseClient.getDoctorsBySpecialization(specialization);
-    }
-    @GetMapping(value = "doctors/city/{city}")
-    public List<DoctorDto> getDoctorsByCity(@PathVariable("city") String city){
-        return databaseClient.getDoctorsByCity(city);
-    }
     @GetMapping(value = "doctors/by-city-and-spec")
-    public List<DoctorDto> getDoctorsBySpecializationAndCity(@RequestParam String specializationName, @RequestParam String city){
-        return databaseClient.getDoctorsBySpecializationAndCity(specializationName, city);
+    public List<DoctorDto> getDoctorsBySpecializationAndCity(@RequestParam String specialization, @RequestParam String city){
+        return databaseClient.getDoctorsBySpecializationAndCity(specialization, city);
     }
+
+    @GetMapping(value = "/patient/pesel/{pesel}")
+    public PatientDto getPatientByPesel(@PathVariable String pesel){
+        return databaseClient.getPatientByPesel(pesel);
+    }
+
+    @GetMapping(value = "/doctor/{id}")
+    public DoctorDto getDoctorById(@PathVariable Integer id){
+        return databaseClient.getDoctorById(id);
+    }
+
+    @GetMapping(value = "/clinic/{id}")
+    public ClinicDto getClinicById(@PathVariable Integer id){
+        return databaseClient.getClinicById(id);
+    }
+
 
 }

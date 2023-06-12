@@ -11,4 +11,5 @@ public class DoctorDto {
     private Integer id;
     private PersonalDataDto personalData;
     private List<SpecjalizationDto> specjalization;
+    private List<ClinicDto> clinics;
 }
