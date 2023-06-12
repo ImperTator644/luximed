@@ -15,6 +15,7 @@
                 <p>Nr telefonu: <span th:text="${user.phone}"></span></p>
                 <p>Płeć: <span th:text="${user.gender}"></span></p>
                 <p>Pesel: <span th:text="${user.pesel}"></span></p>
+                <a th:href="@{/profile-edit}" class="btn" id="change-info-btn">Zmień dane</a>
             </div>
         </div>
     </body>
