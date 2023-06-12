@@ -33,8 +33,30 @@ public class PersonalDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public void addPersonalData(@RequestBody PersonalData personalData) {
+    public String addPersonalData(@RequestBody PersonalData personalData) {
+        if (isNull(personalData.getPesel()) || personalData.getPesel().isBlank()) {
+            return "Pesel is not present";
+        }
+        if (isNull(personalData.getPassword()) || personalData.getPassword().isBlank()) {
+            return "Password is not present";
+        }
+        if (isNull(personalData.getName()) || personalData.getName().isBlank()) {
+            return "Name is not present";
+        }
+        if (isNull(personalData.getSurname()) || personalData.getSurname().isBlank()) {
+            return "Surname is not present";
+        }
+        if (isNull(personalData.getMail()) || !personalData.getMail().contains("@")) {
+            return "Mail is not present";
+        }
+        if (isNull(personalData.getPhone()) || !personalData.getPhone().isBlank()) {
+            return "Phone is not present";
+        }
+        if (isNull(personalData.getGender())) {
+            return "Phone is not present";
+        }
         personalDataRepository.save(personalData);
+        return "";
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")
