@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -33,30 +34,8 @@ public class PersonalDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "add")
-    public String addPersonalData(@RequestBody PersonalData personalData) {
-        if (isNull(personalData.getPesel()) || personalData.getPesel().isBlank()) {
-            return "Pesel is not present";
-        }
-        if (isNull(personalData.getPassword()) || personalData.getPassword().isBlank()) {
-            return "Password is not present";
-        }
-        if (isNull(personalData.getName()) || personalData.getName().isBlank()) {
-            return "Name is not present";
-        }
-        if (isNull(personalData.getSurname()) || personalData.getSurname().isBlank()) {
-            return "Surname is not present";
-        }
-        if (isNull(personalData.getMail()) || !personalData.getMail().contains("@")) {
-            return "Mail is not present";
-        }
-        if (isNull(personalData.getPhone()) || !personalData.getPhone().isBlank()) {
-            return "Phone is not present";
-        }
-        if (isNull(personalData.getGender())) {
-            return "Phone is not present";
-        }
+    public void addPersonalData(@RequestBody @Valid PersonalData personalData) {
         personalDataRepository.save(personalData);
-        return "";
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")

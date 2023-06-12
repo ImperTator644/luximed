@@ -57,7 +57,7 @@ public class ClientController {
         personalData.setMail(mail);
         personalData.setPhone(phone);
         personalData.setGender(Gender.valueOf(gender));
-        personalData.setPesel(pesel);
+        personalData.setUsername(pesel);
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8083/api/database/personalData/update";
         HttpMethod httpMethod = HttpMethod.PUT;
