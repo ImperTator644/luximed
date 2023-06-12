@@ -1,6 +1,5 @@
 package com.luximed.frontservice.client;
 
-import com.luximed.frontservice.dto.AppointmentDto;
 import com.luximed.frontservice.dto.ClinicDto;
 import com.luximed.frontservice.dto.PatientDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,7 +12,7 @@ public interface ClinicClient {
     @GetMapping(value = "api/database/clinic/{id}")
     ClinicDto getClinicById(@PathVariable("id") Integer id);
 
-    @PostMapping(value = "/api/database/add-clinic")
+    @PostMapping(value = "/api/database/clinic/add")
     void addClinic(@RequestParam String buildingNumber,
                    @RequestParam String city,
                    @RequestParam String postalCode,
@@ -24,5 +23,6 @@ public interface ClinicClient {
 
     @GetMapping(value = "/api/database/patient/all")
     List<PatientDto> getPatients();
+
 
 }

@@ -7,7 +7,6 @@ import com.luximed.reservation.dto.AppointmentTypeDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class AppointmentController {
                               @RequestParam Integer appointmentTypeId) throws IllegalAppointmentTimeException {
 
         LocalDate appointmentDate = LocalDate.parse(date);
-        Integer duration = getAppointmentType(appointmentTypeId).getDuration();
+        Integer duration = getAppointmentTypeById(appointmentTypeId).getDuration();
         LocalTime start = LocalTime.parse(dateTime);
         LocalTime end = LocalTime.parse(dateTime).plusMinutes(duration);
 
@@ -60,8 +59,14 @@ public class AppointmentController {
         return appointment;
     }
 
-    public AppointmentTypeDto getAppointmentType(@PathVariable Integer id){
-        return databaseClient.getAppointmentType(id);
+    @GetMapping(value = "/type/{id}")
+    public AppointmentTypeDto getAppointmentTypeById(@PathVariable Integer id){
+        return databaseClient.getAppointmentTypeById(id);
+    }
+
+    @GetMapping(value = "/spec/{specialization}")
+    public List<AppointmentTypeDto> getAppointmentTypeBySpec(@PathVariable String specialization){
+        return databaseClient.getAppointmentTypeBySpec(specialization);
     }
 
     @GetMapping (value = "/doctor/{id}")

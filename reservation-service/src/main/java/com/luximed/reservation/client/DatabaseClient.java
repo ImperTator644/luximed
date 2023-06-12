@@ -24,7 +24,7 @@ public interface DatabaseClient {
     List<DoctorDto> getDoctorsByCity(@PathVariable String city);
 
     @GetMapping(value = "api/database/doctor/by-city-and-spec")
-    List<DoctorDto> getDoctorsBySpecializationAndCity(@RequestParam String specializationName, @RequestParam String city);
+    List<DoctorDto> getDoctorsBySpecializationAndCity(@RequestParam String specialization, @RequestParam String city);
 
     @PostMapping(value = "api/database/appointment/add")
     void addAppointment(@RequestParam Integer patientId,
@@ -38,9 +38,20 @@ public interface DatabaseClient {
     AppointmentDto getAppointment(@PathVariable Integer id);
 
     @GetMapping(value = "api/database/appointmentType/{id}")
-    AppointmentTypeDto getAppointmentType(@PathVariable Integer id);
+    AppointmentTypeDto getAppointmentTypeById(@PathVariable Integer id);
+
+    @GetMapping(value = "api/database/appointmentType/spec/{specialization}")
+    List<AppointmentTypeDto> getAppointmentTypeBySpec(@PathVariable String specialization);
 
     @GetMapping(value = "/api/database/appointment/doctor/{id}")
     List<AppointmentDto> getAppointmentsByDoctorId(@PathVariable Integer id);
 
+    @GetMapping(value = "/api/database/patient/pesel/{pesel}")
+    PatientDto getPatientByPesel(@PathVariable String pesel);
+
+    @GetMapping(value = "/api/database/doctor/{id}")
+    DoctorDto getDoctorById(@PathVariable Integer id);
+
+    @GetMapping(value = "/api/database/clinic/{id}")
+    ClinicDto getClinicById(@PathVariable Integer id);
 }

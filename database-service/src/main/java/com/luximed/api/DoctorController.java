@@ -102,8 +102,8 @@ public class DoctorController {
     }
 
     @GetMapping(value = "by-city-and-spec")
-    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specializationName, @RequestParam String city) {
-        return doctorRepository.getDoctorBySpecializationAndCity(specializationName, city);
+    public List<Doctor> getDoctorsBySpecializationAndClinic(@RequestParam String specialization, @RequestParam String city) {
+        return doctorRepository.getDoctorBySpecializationAndCity(specialization, city);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "delete")

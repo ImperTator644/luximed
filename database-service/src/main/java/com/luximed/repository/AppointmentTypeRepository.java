@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AppointmentTypeRepository extends JpaRepository<AppointmentType, Integer> {
-    List<AppointmentType> getAppointmentTypesBySpecializationId(Integer id);
+    List<AppointmentType> getAppointmentTypesBySpecializationName(String specialization);
 }
