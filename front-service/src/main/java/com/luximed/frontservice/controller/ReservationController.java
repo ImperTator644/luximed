@@ -4,12 +4,13 @@ import com.luximed.frontservice.client.ReservationClient;
 import com.luximed.frontservice.dto.AppointmentTypeDto;
 import com.luximed.frontservice.dto.ClinicDto;
 import com.luximed.frontservice.dto.DoctorDto;
-import com.luximed.frontservice.model.CurrentUser;
+import com.luximed.frontservice.service.CurrentUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,11 +18,11 @@ import java.util.List;
 public class ReservationController {
 
     private final ReservationClient reservationClient;
-    private final CurrentUser currentUser;
+    private final CurrentUserService currentUserService;
 
-    public ReservationController(ReservationClient reservationClient, CurrentUser currentUser) {
+    public ReservationController(ReservationClient reservationClient, CurrentUserService currentUserService) {
         this.reservationClient = reservationClient;
-        this.currentUser = currentUser;
+        this.currentUserService = currentUserService;
     }
 
     @GetMapping("find-doctors")
@@ -55,7 +56,7 @@ public class ReservationController {
                                     @RequestParam Integer appointmentTypeId,
                                     ModelMap model) {
 
-        Integer patientId = reservationClient.getPatientByPesel(currentUser.getUserName()).getId();
+        Integer patientId = reservationClient.getPatientByPesel(currentUserService.getCurrentUser()).getId();
         reservationClient.addAppointment(patientId, date, dateTime, clinicId, doctorId, appointmentTypeId);
         DoctorDto chosenDoctor = reservationClient.getDoctorById(doctorId);
         ClinicDto chosenClinic = reservationClient.getClinicById(clinicId);

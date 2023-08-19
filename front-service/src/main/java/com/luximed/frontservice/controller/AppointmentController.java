@@ -2,7 +2,7 @@ package com.luximed.frontservice.controller;
 
 import com.luximed.frontservice.client.ClientService;
 import com.luximed.frontservice.dto.AppointmentDto;
-import com.luximed.frontservice.model.CurrentUser;
+import com.luximed.frontservice.service.CurrentUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +12,11 @@ import java.util.List;
 @Controller
 public class AppointmentController {
     private final ClientService clientService;
-    private final CurrentUser currentUser;
+    private final CurrentUserService currentUserService;
 
-    public AppointmentController(ClientService clientService, CurrentUser currentUser) {
+    public AppointmentController(ClientService clientService, CurrentUserService currentUserService) {
         this.clientService = clientService;
-        this.currentUser = currentUser;
+        this.currentUserService = currentUserService;
     }
 
     @GetMapping("calendar")
@@ -44,7 +44,7 @@ public class AppointmentController {
 
     @GetMapping("my/appointments")
     public String getAppointmentsByPatientId(ModelMap map){
-        String pesel = currentUser.getUserName();
+        String pesel = currentUserService.getCurrentUser();
         List<AppointmentDto> myAppointments = clientService.getAppointmentsByPesel(pesel);
         map.put("myAppointments", myAppointments);
 
