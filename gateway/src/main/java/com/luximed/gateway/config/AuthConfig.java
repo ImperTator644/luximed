@@ -1,6 +1,5 @@
 package com.luximed.gateway.config;
 
-import com.luximed.gateway.client.FrontClient;
 import com.luximed.gateway.repository.PersonalInfoRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -26,12 +25,10 @@ public class AuthConfig {
     @Value("${log.current.empty.user}")
     private String emptyUser;
     private final PersonalInfoRepository personalInfoRepository;
-    private final FrontClient frontClient;
     private final CurrentUser currentUser;
 
-    public AuthConfig(PersonalInfoRepository personalInfoRepository, FrontClient frontClient, CurrentUser currentUser) {
+    public AuthConfig(PersonalInfoRepository personalInfoRepository, CurrentUser currentUser) {
         this.personalInfoRepository = personalInfoRepository;
-        this.frontClient = frontClient;
         this.currentUser = currentUser;
     }
 
@@ -47,7 +44,6 @@ public class AuthConfig {
                     @Override
                     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
                         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                        frontClient.logUser(userDetails.getUsername());
                         currentUser.setUserName(userDetails.getUsername());
                         return super.onAuthenticationSuccess(webFilterExchange, authentication);
                     }
@@ -57,7 +53,6 @@ public class AuthConfig {
                 .logoutSuccessHandler(new RedirectServerLogoutSuccessHandler() {
                     @Override
                     public Mono<Void> onLogoutSuccess(WebFilterExchange exchange, Authentication authentication) {
-                        frontClient.logUser(emptyUser);
                         currentUser.setUserName(emptyUser);
                         this.setLogoutSuccessUrl(URI.create("/"));
                         return super.onLogoutSuccess(exchange, authentication);

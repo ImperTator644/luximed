@@ -5,9 +5,12 @@ import com.luximed.frontservice.client.ClinicClient;
 import com.luximed.frontservice.dto.Gender;
 import com.luximed.frontservice.dto.PatientDto;
 import com.luximed.frontservice.dto.PersonalDataDto;
-import com.luximed.frontservice.model.CurrentUser;
+import com.luximed.frontservice.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -20,7 +23,7 @@ import java.util.List;
 public class ClientController {
     private final ClinicClient clinicClient;
     private final ClientService clientService;
-    private final CurrentUser currentUser;
+    private final CurrentUserService currentUserService;
 
     @GetMapping("patient/all")
     @ResponseBody
@@ -31,7 +34,7 @@ public class ClientController {
     @GetMapping("profile")
     public ModelAndView getPatient() {
         ModelAndView mav = new ModelAndView("user-profile");
-        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUser.getUserName());
+        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUserService.getCurrentUser());
         mav.addObject("user", dataDto);
         return mav;
     }
@@ -39,7 +42,7 @@ public class ClientController {
     @GetMapping("profile-edit")
     public ModelAndView getPatientEdit() {
         ModelAndView mav = new ModelAndView("user-profile-edit");
-        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUser.getUserName());
+        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUserService.getCurrentUser());
         mav.addObject("user", dataDto);
         return mav;
     }
@@ -67,7 +70,7 @@ public class ClientController {
         restTemplate.exchange(url, httpMethod, requestEntity, String.class);
 
         ModelAndView mav = new ModelAndView("user-profile");
-        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUser.getUserName());
+        PersonalDataDto dataDto = clientService.getPersonalDataByPesel(currentUserService.getCurrentUser());
         mav.addObject("user", dataDto);
         return mav;
     }
@@ -75,7 +78,7 @@ public class ClientController {
     @RequestMapping(method = RequestMethod.GET, value = "my-calendar")
     public ModelAndView getMyCalendar() {
         ModelAndView mav = new ModelAndView("calendar");
-        mav.addObject("pesel", currentUser.getUserName());
+        mav.addObject("pesel", currentUserService.getCurrentUser());
         return mav;
     }
 
