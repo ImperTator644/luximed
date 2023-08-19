@@ -1,11 +1,13 @@
 package com.luximed.frontservice.config;
 
 import com.luximed.frontservice.model.CurrentUser;
-import com.luximed.frontservice.util.UserUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("thymeleaf")
 public class ThymeleafIncludeConfig {
+    @Value("${log.current.empty.user}")
+    private String emptyUser;
     private final CurrentUser currentUser;
 
     public ThymeleafIncludeConfig(CurrentUser currentUser) {
@@ -16,6 +18,6 @@ public class ThymeleafIncludeConfig {
         return currentUser.getUserName();
     }
     public String getEmptyUser(){
-        return UserUtils.EMPTY_USER;
+        return emptyUser;
     }
 }

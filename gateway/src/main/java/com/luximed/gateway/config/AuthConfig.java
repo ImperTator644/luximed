@@ -2,6 +2,7 @@ package com.luximed.gateway.config;
 
 import com.luximed.gateway.client.FrontClient;
 import com.luximed.gateway.repository.PersonalInfoRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -22,20 +23,23 @@ import java.net.URI;
 @EnableWebFluxSecurity
 @Configuration
 public class AuthConfig {
-    private static final String EMPTY_USER = "8g*C!F@%D!KYy9CPqY9Slvd80hnz97yGyT87_^*Pop0tD)5WcMGRSbViza&VVxn!O^Zz3r1tK!*cwDOBFPmx%%_2LT)i&F#deNkFY1uR1I0c(lSi@e*y*e#0Hg1k*fMw";
+    @Value("${log.current.empty.user}")
+    private String emptyUser;
     private final PersonalInfoRepository personalInfoRepository;
     private final FrontClient frontClient;
+    private final CurrentUser currentUser;
 
-    public AuthConfig(PersonalInfoRepository personalInfoRepository, FrontClient frontClient) {
+    public AuthConfig(PersonalInfoRepository personalInfoRepository, FrontClient frontClient, CurrentUser currentUser) {
         this.personalInfoRepository = personalInfoRepository;
         this.frontClient = frontClient;
+        this.currentUser = currentUser;
     }
 
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
         return http.csrf().disable()
                 .authorizeExchange()
-                .pathMatchers("/auth/register", "/register", "/", "/images/**", "/js/**", "/css/**").permitAll()
+                .pathMatchers("/auth/register", "/register", "/logged-user", "/", "/images/**", "/js/**", "/css/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .formLogin()
@@ -44,6 +48,7 @@ public class AuthConfig {
                     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
                         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                         frontClient.logUser(userDetails.getUsername());
+                        currentUser.setUserName(userDetails.getUsername());
                         return super.onAuthenticationSuccess(webFilterExchange, authentication);
                     }
                 })
@@ -52,7 +57,8 @@ public class AuthConfig {
                 .logoutSuccessHandler(new RedirectServerLogoutSuccessHandler() {
                     @Override
                     public Mono<Void> onLogoutSuccess(WebFilterExchange exchange, Authentication authentication) {
-                        frontClient.logUser(EMPTY_USER);
+                        frontClient.logUser(emptyUser);
+                        currentUser.setUserName(emptyUser);
                         this.setLogoutSuccessUrl(URI.create("/"));
                         return super.onLogoutSuccess(exchange, authentication);
                     }
